@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from io import BytesIO
 
 st.set_page_config(page_title="Tell Me What's your stock", layout="wide")
-st.title("📊 Stock Range Analyzer App")
+st.title("📊 What's Your Stock")
 
 # --- Sidebar Inputs ---
 with st.sidebar:
