@@ -2,6 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy_financial as npf
 
 st.title("💰 Capital Budgeting Calculator")
 
@@ -27,7 +28,7 @@ for t in range(years):
     npv += cash_flows[t] / ((1 + discount_rate) ** (t+1))
 
 # --- IRR Calculation ---
-irr = np.irr([-initial_investment] + cash_flows.tolist())
+irr = npf.irr([-initial_investment] + cash_flows.tolist())
 
 # --- Payback Period ---
 cumulative_cash = np.cumsum(cash_flows)
