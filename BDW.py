@@ -1,4 +1,4 @@
- import streamlit as st
+import streamlit as st
 import time
 
 st.set_page_config(page_title="Happy 21st Birthday Sneha 🎉", layout="centered")
