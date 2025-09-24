@@ -3,7 +3,22 @@ import time
 
 st.set_page_config(page_title="Happy 21st 🎉", page_icon="🎂", layout="centered")
 
-st.title("💖 7 Praises for You 💖")
+# Main title
+st.title("🎂 Happy 21st Birthday Sneha! 🎉")
+
+# Opening birthday wish
+st.markdown(
+    """
+    ## 💌 My Dearest Sneha,  
+    On this very special day, I want to celebrate *you*.  
+    You’re not just turning 21, you’re stepping into a beautiful new chapter of life.  
+    May your day be filled with love, laughter, and memories that last forever. 🥳💖  
+    """
+)
+
+st.markdown("---")
+
+st.header("💖 7 Praises for You 💖")
 st.markdown("Click below to reveal each praise, one at a time! 🎁")
 
 # List of 7 polished praises
@@ -24,12 +39,10 @@ if "index" not in st.session_state:
 # Button to reveal the next praise
 if st.button("✨ Reveal Next Praise ✨"):
     if st.session_state.index < len(praises):
-        # Display praise with heart emoji animation
         st.success(f"💖 {praises[st.session_state.index]} 💖")
         st.session_state.index += 1
-        # Small heart animation using st.markdown
         st.markdown("❤️✨💖✨❤️")
-        time.sleep(0.3)  # brief pause for effect
+        time.sleep(0.3)
     else:
         st.balloons()
-        st.warning("🎉 All 7 praises revealed! You are truly amazing! 💕")
+        st.success("🎉 Happy 21st once again, Sneha! You are truly amazing and loved 💕")
