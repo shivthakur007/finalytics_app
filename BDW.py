@@ -28,7 +28,7 @@ st.markdown("""
   background: linear-gradient(-45deg, #ff9a9e, #ffd1dc, #ffecd2, #ffe0ac);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  color: #ff6f91;  /* Soft pink/red for text */
+  color: #ff6f91;  /* Black/red for text */
 }
 
 .stButton>button {
