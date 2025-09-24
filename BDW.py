@@ -1,95 +1,100 @@
-
 import streamlit as st
-import streamlit.components.v1 as components
 import time
+import streamlit.components.v1 as components
 
 st.set_page_config(page_title="Happy 21st Birthday Sneha 🎉", layout="centered")
 
-# ========== DYNAMIC BACKGROUND (HTML) ==========
-background_html = """
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(270deg, #ff758c, #ff7eb3, #6a82fb, #fc5c7d);
-  background-size: 800% 800%;
-  animation: gradientAnimation 20s ease infinite;
-}
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.sparkle, .heart {
-  position: absolute;
-  opacity: 0.8;
-}
-.sparkle {
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  animation: floatSparkles 10s linear infinite;
-}
-.heart {
-  width: 20px;
-  height: 20px;
-  background: red;
-  transform: rotate(45deg);
-  animation: floatHearts 12s linear infinite;
-}
-.heart:before,
-.heart:after {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: red;
-  border-radius: 50%;
-}
-.heart:before {
-  top: -10px;
-  left: 0;
-}
-.heart:after {
-  left: -10px;
-  top: 0;
-}
-@keyframes floatSparkles {
-  from { transform: translateY(100vh) scale(0.5); opacity: 1; }
-  to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-}
-@keyframes floatHearts {
-  from { transform: translateY(100vh) scale(0.6); opacity: 1; }
-  to { transform: translateY(-10vh) scale(1); opacity: 0; }
-}
-</style>
-<script>
-function createSparkle() {
-  const sparkle = document.createElement("div");
-  sparkle.classList.add("sparkle");
-  sparkle.style.left = Math.random() * window.innerWidth + "px";
-  sparkle.style.animationDuration = 5 + Math.random() * 5 + "s";
-  document.body.appendChild(sparkle);
-  setTimeout(() => sparkle.remove(), 10000);
-}
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.style.left = Math.random() * window.innerWidth + "px";
-  heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 12000);
-}
-setInterval(createSparkle, 400);
-setInterval(createHeart, 1200);
-</script>
-"""
-st.markdown(background_html, unsafe_allow_html=True)
+# ===== CSS for dynamic background =====
+st.markdown("""
+    <style>
+    /* Target Streamlit App */
+    .stApp {
+        background: linear-gradient(270deg, #ff758c, #ff7eb3, #6a82fb, #fc5c7d);
+        background-size: 800% 800%;
+        animation: gradientAnimation 20s ease infinite;
+        overflow: hidden;
+        position: relative;
+    }
 
-# ========== MAIN CONTENT ==========
+    @keyframes gradientAnimation {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Floating elements */
+    .sparkle, .heart {
+        position: fixed;
+        z-index: 0;
+        opacity: 0.8;
+    }
+    .sparkle {
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        animation: floatSparkles 10s linear infinite;
+    }
+    .heart {
+        width: 20px;
+        height: 20px;
+        background: red;
+        transform: rotate(45deg);
+        animation: floatHearts 12s linear infinite;
+    }
+    .heart:before, .heart:after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-radius: 50%;
+    }
+    .heart:before {
+        top: -10px;
+        left: 0;
+    }
+    .heart:after {
+        left: -10px;
+        top: 0;
+    }
+
+    @keyframes floatSparkles {
+        from { transform: translateY(100vh) scale(0.5); opacity: 1; }
+        to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+    @keyframes floatHearts {
+        from { transform: translateY(100vh) scale(0.6); opacity: 1; }
+        to { transform: translateY(-10vh) scale(1); opacity: 0; }
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ===== JS for sparkles & hearts =====
+components.html("""
+    <script>
+    function createSparkle() {
+      const sparkle = document.createElement("div");
+      sparkle.classList.add("sparkle");
+      sparkle.style.left = Math.random() * window.innerWidth + "px";
+      sparkle.style.animationDuration = 5 + Math.random() * 5 + "s";
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 10000);
+    }
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 12000);
+    }
+    setInterval(createSparkle, 400);
+    setInterval(createHeart, 1200);
+    </script>
+""", height=0, width=0)
+
+# ===== Streamlit Content =====
 st.title("🎂 Happy 21st Birthday Sneha! 🎉")
 
 st.markdown(
@@ -106,7 +111,6 @@ st.markdown("---")
 st.header("💖 7 Praises for You 💖")
 st.markdown("Click below to reveal each praise, one at a time! 🎁")
 
-# List of praises
 praises = [
     "Your eyes hold so much depth that anyone who can’t swim could easily drown in them. I’m lucky I know how to swim — that’s why I’m still alive.",
     "Your smile is so contagious that it has the power to make even the sanest person go delightfully insane.",
@@ -117,7 +121,6 @@ praises = [
     "Being around you makes everything brighter. Your presence turns ordinary moments into memories I’ll cherish forever, and I can’t imagine a day without your light."
 ]
 
-# Session state to keep track
 if "index" not in st.session_state:
     st.session_state.index = 0
 
@@ -130,4 +133,3 @@ if st.button("✨ Reveal Next Praise ✨"):
     else:
         st.balloons()
         st.success("🎉 Happy 21st once again, Sneha! You are truly amazing and loved 💕")
-
