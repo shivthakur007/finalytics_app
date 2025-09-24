@@ -1,48 +1,37 @@
-import streamlit as st
+ import streamlit as st
 import time
-import streamlit.components.v1 as components
 
 st.set_page_config(page_title="Happy 21st Birthday Sneha 🎉", layout="centered")
 
-# ===== CSS for dynamic background =====
+# ===== CSS Background + Animations =====
 st.markdown("""
     <style>
-    /* Target Streamlit App */
     .stApp {
         background: linear-gradient(270deg, #ff758c, #ff7eb3, #6a82fb, #fc5c7d);
         background-size: 800% 800%;
-        animation: gradientAnimation 20s ease infinite;
-        overflow: hidden;
+        animation: gradientBG 20s ease infinite;
         position: relative;
+        overflow: hidden;
+    }
+    @keyframes gradientBG {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
     }
 
-    @keyframes gradientAnimation {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Floating elements */
-    .sparkle, .heart {
-        position: fixed;
-        z-index: 0;
-        opacity: 0.8;
-    }
-    .sparkle {
-        width: 8px;
-        height: 8px;
-        background: white;
-        border-radius: 50%;
-        animation: floatSparkles 10s linear infinite;
-    }
+    /* Floating hearts */
     .heart {
+        position: fixed;
         width: 20px;
         height: 20px;
         background: red;
         transform: rotate(45deg);
-        animation: floatHearts 12s linear infinite;
+        animation: floatHearts 10s linear infinite;
+        opacity: 0.7;
+        z-index: 0;
     }
-    .heart:before, .heart:after {
+    .heart:before,
+    .heart:after {
         content: "";
         position: absolute;
         width: 20px;
@@ -50,61 +39,53 @@ st.markdown("""
         background: red;
         border-radius: 50%;
     }
-    .heart:before {
-        top: -10px;
-        left: 0;
-    }
-    .heart:after {
-        left: -10px;
-        top: 0;
+    .heart:before { top: -10px; left: 0; }
+    .heart:after { left: -10px; top: 0; }
+
+    @keyframes floatHearts {
+        from {transform: translateY(100vh) scale(0.6) rotate(45deg); opacity: 1;}
+        to {transform: translateY(-10vh) scale(1) rotate(45deg); opacity: 0;}
     }
 
-    @keyframes floatSparkles {
-        from { transform: translateY(100vh) scale(0.5); opacity: 1; }
-        to { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    /* Floating sparkles */
+    .sparkle {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+        animation: floatSparkles 8s linear infinite;
+        opacity: 0.8;
+        z-index: 0;
     }
-    @keyframes floatHearts {
-        from { transform: translateY(100vh) scale(0.6); opacity: 1; }
-        to { transform: translateY(-10vh) scale(1); opacity: 0; }
+    @keyframes floatSparkles {
+        from {transform: translateY(100vh) scale(0.5); opacity: 1;}
+        to {transform: translateY(-10vh) scale(1.2); opacity: 0;}
     }
     </style>
-""", unsafe_allow_html=True)
 
-# ===== JS for sparkles & hearts =====
-components.html("""
-    <script>
-    function createSparkle() {
-      const sparkle = document.createElement("div");
-      sparkle.classList.add("sparkle");
-      sparkle.style.left = Math.random() * window.innerWidth + "px";
-      sparkle.style.animationDuration = 5 + Math.random() * 5 + "s";
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 10000);
-    }
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.style.left = Math.random() * window.innerWidth + "px";
-      heart.style.animationDuration = 6 + Math.random() * 6 + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 12000);
-    }
-    setInterval(createSparkle, 400);
-    setInterval(createHeart, 1200);
-    </script>
-""", height=0, width=0)
+    <!-- Generate multiple hearts and sparkles -->
+    <div class="heart" style="left:10%; animation-delay:0s;"></div>
+    <div class="heart" style="left:30%; animation-delay:2s;"></div>
+    <div class="heart" style="left:50%; animation-delay:4s;"></div>
+    <div class="heart" style="left:70%; animation-delay:6s;"></div>
+    <div class="heart" style="left:90%; animation-delay:8s;"></div>
 
-# ===== Streamlit Content =====
+    <div class="sparkle" style="left:20%; animation-delay:1s;"></div>
+    <div class="sparkle" style="left:40%; animation-delay:3s;"></div>
+    <div class="sparkle" style="left:60%; animation-delay:5s;"></div>
+    <div class="sparkle" style="left:80%; animation-delay:7s;"></div>
+    """, unsafe_allow_html=True)
+
+# ===== Main Content =====
 st.title("🎂 Happy 21st Birthday Sneha! 🎉")
 
-st.markdown(
-    """
-    ## 💌 My Dearest Sneha,  
-    On this very special day, I want to celebrate *you*.  
-    You’re not just turning 21, you’re stepping into a beautiful new chapter of life.  
-    May your day be filled with love, laughter, and memories that last forever. 🥳💖  
-    """
-)
+st.markdown("""
+## 💌 My Dearest Sneha  
+On this very special day, I want to celebrate *you*.  
+You’re not just turning 21, you’re stepping into a beautiful new chapter of life.  
+May your day be filled with love, laughter, and memories that last forever. 🥳💖  
+""")
 
 st.markdown("---")
 
