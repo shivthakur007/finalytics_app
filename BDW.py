@@ -15,7 +15,7 @@ praises = [
 # Set page config
 st.set_page_config(page_title="Happy 21st Birthday Sneha 🎉", layout="wide")
 
-# CSS for background + gradient text
+# CSS for background + text color
 st.markdown("""
 <style>
 @keyframes gradientBG {
@@ -28,27 +28,11 @@ st.markdown("""
   background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #fbc2eb);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  position: relative;
-  overflow: hidden;
-  color: white;
+  color: #ffd1dc;  /* Soft pastel pink */
 }
 
-.stApp > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Gradient Text */
-.gradient-text {
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: bold;
-}
-
-/* Button style */
 .stButton>button {
-  background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+  background-color: #ff9a9e;
   color: white;
   font-weight: bold;
   border-radius: 10px;
@@ -58,18 +42,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Main content
-st.markdown('<h1 class="gradient-text">🎂 Happy 21st Birthday Sneha! 🎉</h1>', unsafe_allow_html=True)
-
-st.markdown('<h3 class="gradient-text">💌 My Dearest Sneha</h3>', unsafe_allow_html=True)
+st.title("🎂 Happy 21st Birthday Sneha! 🎉")
 st.markdown("""
+## 💌 My Dearest Sneha  
 On this very special day, I want to celebrate *you*.  
 You’re not just turning 21, you’re stepping into a beautiful new chapter of life.  
 May your day be filled with love, laughter, and memories that last forever. 🥳💖  
 """)
 
 st.markdown("---")
-
-st.markdown('<h2 class="gradient-text">💖 7 Praises for You 💖</h2>', unsafe_allow_html=True)
+st.header("💖 7 Praises for You 💖")
 st.markdown("Click below to reveal each praise, one at a time! 🎁")
 
 if "index" not in st.session_state:
@@ -77,7 +59,7 @@ if "index" not in st.session_state:
 
 if st.button("✨ Reveal Next Praise ✨"):
     if st.session_state.index < len(praises):
-        st.markdown(f'<p class="gradient-text">💖 {praises[st.session_state.index]} 💖</p>', unsafe_allow_html=True)
+        st.success(f"💖 {praises[st.session_state.index]} 💖")
         st.session_state.index += 1
         st.markdown("❤️✨💖✨❤️")
         time.sleep(0.3)
