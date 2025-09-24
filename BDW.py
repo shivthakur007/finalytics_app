@@ -15,7 +15,7 @@ praises = [
 # Set page config
 st.set_page_config(page_title="Happy 21st Birthday Sneha 🎉", layout="wide")
 
-# CSS for background + text color
+# CSS for pastel background + matching text color
 st.markdown("""
 <style>
 @keyframes gradientBG {
@@ -25,10 +25,10 @@ st.markdown("""
 }
 
 .stApp {
-  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1, #fbc2eb);
+  background: linear-gradient(-45deg, #ff9a9e, #ffd1dc, #ffecd2, #ffe0ac);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
-  color: #ffd1dc;  /* Soft pastel pink */
+  color: #ff6f91;  /* Soft pink/red for text */
 }
 
 .stButton>button {
