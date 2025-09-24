@@ -3,6 +3,22 @@ import time
 
 st.set_page_config(page_title="Happy 21st 🎉", page_icon="🎂", layout="centered")
 
+# Custom background with CSS
+page_bg = """
+<style>
+body {
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7); /* soft pink gradient */
+    color: #000000;
+}
+h1, h2, h3, h4 {
+    text-align: center;
+    color: #4b0d49;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+</style>
+"""
+st.markdown(page_bg, unsafe_allow_html=True)
+
 # Main title
 st.title("🎂 Happy 21st Birthday Sneha! 🎉")
 
@@ -21,7 +37,7 @@ st.markdown("---")
 st.header("💖 7 Praises for You 💖")
 st.markdown("Click below to reveal each praise, one at a time! 🎁")
 
-# List of 7 polished praises
+# List of 7 praises
 praises = [
     "Your eyes hold so much depth that anyone who can’t swim could easily drown in them. I’m lucky I know how to swim — that’s why I’m still alive.",
     "Your smile is so contagious that it has the power to make even the sanest person go delightfully insane.",
@@ -32,17 +48,18 @@ praises = [
     "Being around you makes everything brighter. Your presence turns ordinary moments into memories I’ll cherish forever, and I can’t imagine a day without your light."
 ]
 
-# Keep track of progress using session state
+# Track progress
 if "index" not in st.session_state:
     st.session_state.index = 0
 
-# Button to reveal the next praise
+# Reveal praises one by one
 if st.button("✨ Reveal Next Praise ✨"):
     if st.session_state.index < len(praises):
         st.success(f"💖 {praises[st.session_state.index]} 💖")
         st.session_state.index += 1
-        st.markdown("❤️✨💖✨❤️")
+        st.markdown("<h3 style='text-align:center;'>❤️✨💖✨❤️</h3>", unsafe_allow_html=True)
         time.sleep(0.3)
     else:
         st.balloons()
         st.success("🎉 Happy 21st once again, Sneha! You are truly amazing and loved 💕")
+
