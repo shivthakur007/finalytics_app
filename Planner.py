@@ -308,5 +308,3 @@ st.info(
 - We compute **Equity IRR/NPV** using the down payment as initial outflow, monthly equity cashflows, and terminal sale net of remaining loan.
 """
 )
-
-st.caption("Built with ❤️ in Streamlit. Adjust inputs in the sidebar to explore scenarios.")
