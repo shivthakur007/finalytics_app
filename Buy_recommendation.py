@@ -22,7 +22,7 @@ def calculate_emi(principal, annual_interest_rate, years):
 st.header("Input Your Details")
 
 monthly_income = st.number_input("Monthly Income (₹):", min_value=0, step=1000)
-monthly_expense = st.number_input("Monthly Car Expense Budget (fuel, insurance etc.) (₹):", min_value=0, step=500)
+monthly_expense = st.number_input("Monthly Car Expense Budget (fuel, insurance etc.) (Excl. EMI) (₹):", min_value=0, step=500)
 car_price = st.number_input("Car Price (₹):", min_value=0, step=10000)
 down_payment = st.number_input("Down Payment (₹):", min_value=0, step=10000)
 loan_years = st.number_input("Loan Tenure (Years):", min_value=1.0, max_value=7.0, step=0.5)
