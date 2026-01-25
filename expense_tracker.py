@@ -1,4 +1,5 @@
 import streamlit as st 
+import pandas as pd
 
 st.title("Expense Tracker💸")
 st.markdown("Money saved is equal to money earned")
@@ -22,6 +23,18 @@ if st.button("Add Expense"):
 st.subheader("Your Expenses") 
 st.write(st.session_state.expenses)
     
+#Table View
+if st.session_state.expenses:
+    df = pd.DateFrame(
+        st.session_state.expenses.items(),
+        columns = ["Amount" , "Expense"]
+    )
+    st.dataframe(df, use_container_width = True)
     
+    #Optional Total
+    st.info(f"Total Expense: ${df['Amount'].sum()}") 
+else:
+    st.warning("No Expense added Yet")
+        
     
 
