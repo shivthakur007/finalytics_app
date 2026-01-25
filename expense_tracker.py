@@ -21,7 +21,7 @@ if st.button("Add Expense"):
         
 
 st.subheader("Your Expenses") 
-st.write(st.session_state.expenses)
+
     
 #Table View
 if st.session_state.expenses:
