@@ -27,7 +27,7 @@ st.write(st.session_state.expenses)
 if st.session_state.expenses:
     df = pd.DataFrame(
         st.session_state.expenses.items(),
-        columns = ["Amount" , "Expense"]
+        columns = ["Expense" , "Amount"]
     )
     st.dataframe(df, use_container_width = True)
     
