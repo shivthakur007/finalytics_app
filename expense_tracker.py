@@ -25,7 +25,7 @@ st.write(st.session_state.expenses)
     
 #Table View
 if st.session_state.expenses:
-    df = pd.DateFrame(
+    df = pd.DataFrame(
         st.session_state.expenses.items(),
         columns = ["Amount" , "Expense"]
     )
