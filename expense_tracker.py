@@ -30,6 +30,16 @@ if st.session_state.expenses:
         columns = ["Expense" , "Amount"]
     )
     st.dataframe(df, use_container_width = True)
+
+#Delete section
+    st.subheader("Delete Expense")
+    expense_to_delete = st.selectbox("select an expense to delete",
+                                     list(st.session_state.expenses.keys())
+                                    )
+    if st.button("Delete an Expense"):
+        del st.session_state.expense[expense_to_delete]
+        st.success(f"Deleted {expense_to_delete}")
+        
     
     #Optional Total
     st.info(f"Total Expense: ${df['Amount'].sum()}") 
