@@ -37,8 +37,8 @@ if st.session_state.expenses:
                                      list(st.session_state.expenses.keys())
                                     )
     if st.button("Delete an Expense"):
-        del st.session_state.expense[expense_to_delete]
-        st.success(f"Deleted {expenses_to_delete}")
+        del st.session_state.expenses[expense_to_delete]
+        st.success(f"Deleted {expense_to_delete}")
         
     
     #Optional Total
