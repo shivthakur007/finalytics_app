@@ -1,50 +1,88 @@
-import streamlit as st 
+import streamlit as st
 import pandas as pd
+import sqlite3
 
-st.title("Expense Tracker💸")
+# ----------------------------
+# Database Setup
+# ----------------------------
+conn = sqlite3.connect("expenses.db", check_same_thread=False)
+cursor = conn.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS expenses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    expense TEXT NOT NULL,
+    amount INTEGER NOT NULL
+)
+""")
+conn.commit()
+
+# ----------------------------
+# Streamlit UI
+# ----------------------------
+st.title("Expense Tracker 💸")
 st.markdown("Money saved is equal to money earned")
 
-# Initialise dictionary in session state
-if "expenses" not in st.session_state:
-    st.session_state.expenses = {}
+# ----------------------------
+# Add Expense Section
+# ----------------------------
+st.subheader("Add Expense")
 
-#Take the user input 
-exp = st.text_input("Enter the expense: ")
-amt = st.number_input("Enter the Amount: ", min_value = 0, step = 50)
+expense = st.text_input("Enter Expense Name")
+amount = st.number_input("Enter Amount", min_value=0, step=50)
 
 if st.button("Add Expense"):
-    if exp:
-        st.session_state.expenses[exp] = amt
-        st.success(f"Added {exp} : ${amt}")
+    if expense.strip():
+        cursor.execute(
+            "INSERT INTO expenses (expense, amount) VALUES (?, ?)",
+            (expense, amount)
+        )
+        conn.commit()
+        st.success(f"Added {expense} : ₹{amount}")
     else:
-        st.warning("Please enter the expense")
-        
+        st.warning("Please enter an expense name")
 
-st.subheader("Your Expenses") 
+# ----------------------------
+# View Expenses
+# ----------------------------
+st.subheader("Your Expenses")
 
-    
-#Table View
-if st.session_state.expenses:
-    df = pd.DataFrame(
-        st.session_state.expenses.items(),
-        columns = ["Expense" , "Amount"]
+df = pd.read_sql("SELECT * FROM expenses", conn)
+
+if not df.empty:
+    st.dataframe(
+        df.drop(columns=["id"]),
+        use_container_width=True
     )
-    st.dataframe(df, use_container_width = True)
 
-#Delete section
+    # ----------------------------
+    # Delete Expense
+    # ----------------------------
     st.subheader("Delete Expense")
-    expense_to_delete = st.selectbox("select an expense to delete",
-                                     list(st.session_state.expenses.keys())
-                                    )
-    if st.button("Delete an Expense"):
-        del st.session_state.expenses[expense_to_delete]
-        st.success(f"Deleted {expense_to_delete}")
-        
-    
-    #Optional Total
-    st.info(f"Total Expense: ${df['Amount'].sum()}") 
-else:
-    st.warning("No Expense added Yet")
-        
-    
 
+    expense_to_delete = st.selectbox(
+        "Select an expense to delete",
+        df["expense"].tolist()
+    )
+
+    if st.button("Delete Expense"):
+        cursor.execute(
+            "DELETE FROM expenses WHERE expense = ?",
+            (expense_to_delete,)
+        )
+        conn.commit()
+        st.success(f"Deleted {expense_to_delete}")
+
+    # ----------------------------
+    # Total Expense
+    # ----------------------------
+    total = df["amount"].sum()
+    st.info(f"Total Expense: ₹{total}")
+
+else:
+    st.warning("No expenses added yet")
+
+# ----------------------------
+# Close connection safely
+# ----------------------------
+conn.close()
