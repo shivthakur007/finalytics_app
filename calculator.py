@@ -94,51 +94,51 @@ if calculator == "Financial":
 
     if select == "Simple Interest":
 
-        p = st.number_input("Principal")
-        r = st.number_input("Rate (%)")
-        t = st.number_input("Time (years)")
+        p = st.number_input("Principal", key="si_p")
+        r = st.number_input("Rate (%)", key="si_r")
+        t = st.number_input("Time (years)", key="si_t")
 
-        if st.button("Calculate"):
+        if st.button("Calculate", key="si_button"):
             result = simple_interest(p, r, t)
             st.success(f"Simple Interest = {result}")
-            
+
     elif select == "Present Value":
 
-        fv = st.number_input("Future Value")
-        r = st.number_input("Rate (%)")
-        n = st.number_input("Time (years)")
+        fv = st.number_input("Future Value", key="pv_fv")
+        r = st.number_input("Rate (%)", key="pv_r")
+        n = st.number_input("Time (years)", key="pv_n")
 
-        if st.button("Calculate"):
+        if st.button("Calculate", key="pv_button"):
             result = present_value(fv, r, n)
             st.success(f"Present Value = {result}")
-            
+
     elif select == "Compound Interest":
 
-        pv = st.number_input("Principal")
-        r = st.number_input("Rate (%)")
-        n = st.number_input("Time (years)")
+        pv = st.number_input("Principal", key="ci_pv")
+        r = st.number_input("Rate (%)", key="ci_r")
+        n = st.number_input("Time (years)", key="ci_n")
 
-        if st.button("Calculate"):
+        if st.button("Calculate", key="ci_button"):
             result = compound_interest(pv, r, n)
             st.success(f"Compound Interest = {result}")
-            
+
     elif select == "Future Value":
 
-        pv = st.number_input("Present Value")
-        r = st.number_input("Rate (%)")
-        n = st.number_input("Time (years)")
+        pv = st.number_input("Present Value", key="fv_pv")
+        r = st.number_input("Rate (%)", key="fv_r")
+        n = st.number_input("Time (years)", key="fv_n")
 
-        if st.button("Calculate"):
+        if st.button("Calculate", key="fv_button"):
             result = compound_value(pv, r, n)
             st.success(f"Future Value = {result}")
-
+            
 if calculator == "Simple":
     st.title("Simple Calculator 🧮")
     # User Input
     expression = st.text_input("Enter Expression", "2 + 3 * 5")
 
     # Calculate Button
-    if st.button("Calculate"):
+    if st.button("Calculate", key="simple_calc"):
 
         try:
             result = evaluate(expression)
