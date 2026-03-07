@@ -192,7 +192,7 @@ if calculator == "Simple":
 
         else:
             try:
-                result = evaluate(expression)
+                result = evaluate_expression(expression)
                 st.success(f"Result: {result}")
 
             except ZeroDivisionError:
