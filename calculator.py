@@ -132,19 +132,21 @@ if calculator == "Financial":
             result = compound_value(pv, r, n)
             st.success(f"Future Value = {result}")
             
-if calculator == "Simple":
-    st.title("Simple Calculator 🧮")
-    # User Input
-    expression = st.text_input("Enter Expression", "2 + 3 * 5")
+if st.button("Calculate", key="simple_calc"):
 
-    # Calculate Button
-    if st.button("Calculate", key="simple_calc"):
+    if expression.strip() == "":
+        st.warning("Please enter a mathematical expression")
 
+    else:
         try:
             result = evaluate(expression)
             st.success(f"Result: {result}")
 
-        except Exception as e:
-            st.error(f"Error: {e}")
+        except ZeroDivisionError:
+            st.warning("Result is undefined (division by zero)")
 
+        except TypeError:
+            st.error("Invalid mathematical expression")
 
+        except Exception:
+            st.error("Something went wrong while evaluating the expression")
